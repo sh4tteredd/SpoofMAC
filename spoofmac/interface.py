@@ -442,8 +442,17 @@ class MacSpoofer(OsSpoofer):
         # For some reason this seems to be required even when changing a
         # non-airport device.
         subprocess.check_call([
-            MacSpoofer.PATH_TO_AIRPORT,
-            '-z'
+            'networksetup',
+            '-setairportpower',
+            device,
+            'off'
+        ])
+
+        subprocess.check_call([
+            'networksetup',
+            '-setairportpower',
+            device,
+            'on'
         ])
 
         # Change the MAC.
